@@ -11,8 +11,14 @@ $con=mysqli_connect($host,$user,$pass,$db);
 if ($con)
 echo 'Connected successfully to mydb database';
 
-$sql="insert into mytable1 (username,password,email) values ('okpok',663636363,'nyin@es.ukod')";
-$query=mysqli_query($con,$sql);
-if($query)
-  echo 'data inserted successfully';
+$sql= "SELECT * FROM mytable1"; 
+$result= $con -> query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<p>". $row["id"]. $row["username"]. $row["email"]. "</p>"; "<br>";
+    }
+}  else {
+    echo "0 results";
+}
 ?>
